@@ -2,6 +2,10 @@ FROM kalilinux/kali-linux-docker
 
 MAINTAINER @viyatb viyat.bhalodia@owasp.org, @alexandrasandulescu alecsandra.sandulescu@gmail.com
 
+RUN apt-get update 
+
+RUN apt-get install gnupg2 -y
+
 # Kali signatures preventive update
 RUN wget -q -O - archive.kali.org/archive-key.asc | apt-key add
 
@@ -26,13 +30,17 @@ ENV PYCURL_SSL_LIBRARY openssl
 
 #download latest OWTF
 RUN git clone -b develop https://github.com/owtf/owtf.git
+RUN mkdir owtf/tools
 RUN mkdir owtf/tools/restricted
 
 ENV TERM xterm
 ENV SHELL /bin/bash
 
 # core installation
-RUN python owtf/install/install.py
+WORKDIR owtf
+RUN pip install tornado
+RUN pip install wafw00f
+RUN python setup.py install
 
 # expose ports
 EXPOSE 8010 8009 8008

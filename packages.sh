@@ -18,3 +18,4 @@ apt-get install -y  sudo \
                     postgresql \
                     postgresql-client \
                     postgresql-client-common \
+		    gnupg2 \

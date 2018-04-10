@@ -9,11 +9,11 @@ PACKAGES="theharvester \
           metasploit-framework \
           wpscan \
           wapiti \
-          waffit \
           hydra \
           metagoofil \
           o-saft"
 
+apt-get update
 if [ "$1" = "--download-only" ]; then
   apt-get install -d -y $PACKAGES
 else
